@@ -1,23 +1,32 @@
-import React from 'react'
-import { SafeAreaView, Image, StyleSheet } from 'react-native'
+import React from 'react';
+import { SafeAreaView, View } from 'react-native';
 
-import rnImg from './img/rn.png'
-
-const Img = () => {
-  return (
-    <SafeAreaView style={{flex: 1}}>
-      <Image source={require('./img/rn.png')} style={styles.img}/>
-      <Image source={rnImg} style={styles.img}/>
-    </SafeAreaView>
-  )
+const Mondrian = () => {
+	return (
+		<SafeAreaView style={{flex:1}}>
+			<View style={{flex:6, flexDirection:'row'}}>
+				<View style={{flex:2}}>
+					<View style={{flex:3, flexDirection:'row'}}>
+						<View style={{flex:3}}>
+							<View style={{flex:3}}></View>
+							<View style={{flex:2, backgroundColor:'blue'}}></View>
+						</View>
+						<View style={{flex:2, backgroundColor:'black'}}></View>
+					</View>
+					<View style={{flex:2}}></View>
+				</View>
+				<View style={{flex:1}}>
+					<View style={{flex:1, backgroundColor:'yellow'}}></View>
+					<View style={{flex:2, backgroundColor:'blue'}}></View>
+				</View>
+			</View>
+			<View style={{flex:1, backgroundColor:'red'}}></View>
+			<View style={{flex:1, flexDirection:'row'}}>
+				<View style={{flex:1, backgroundColor:'yellow'}}></View>
+				<View style={{flex:2, backgroundColor:'black'}}></View>
+			</View>
+		</SafeAreaView>
+	)
 }
 
-const styles = StyleSheet.create({
-  img: {
-    height: 200,
-    width: 200,
-    resizeMode: 'contain'
-  }
-})
-
-export default Img
+export default Mondrian;
