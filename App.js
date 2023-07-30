@@ -1,129 +1,101 @@
 import React from 'react';
 import {
+	SafeAreaView,
+	ScrollView,
 	View,
-	ImageBackground,
-	TouchableWithoutFeedback,
-	Image,
-	Text,
-	Alert,
+	TouchableOpacity,
+    Text,
+	Linking,
 	StyleSheet
 } from 'react-native';
 
-const createAlert = ( button = "정의되지 않은" ) => {
-	Alert.alert (
-		`${button}`,
-		`${button} 버튼입니다.`,
-		[
-			{
-				text:"취소",
-				onPress: () => console.log("취소 버튼을 눌렀습니다."),
-				style: "cancel"
-			},
-			{
-				text:"확인",
-				onPress: () => console.log("확인 버튼을 눌렀습니다.")
-			}
-		]
-	)
-}
+const DATA = {
+	"page": [
+		{
+			"name": "GOOGLE",
+			"url": "https://www.google.com/",
+			"mainColor": "red"
+		},
+		{
+			"name": "NAVER",
+			"url": "https://www.naver.com/",
+			"mainColor": "yellowgreen"
+		},
+		{
+			"name": "DAUM",
+			"url": "https://www.daum.net/",
+			"mainColor": "orange"
+		},
+		{
+			"name": "YAHOO",
+			"url": "https://www.yahoo.com/",
+			"mainColor": "mediumpurple"
+		},
+		{
+			"name": "BING",
+			"url": "https://www.bing.com/",
+			"mainColor": "green"
+		},
+		{
+			"name": "ZUM",
+			"url": "https://zum.com/",
+			"mainColor": "skyblue"
+		},
+		{
+			"name": "NATE",
+			"url": "https://www.nate.com/",
+			"mainColor": "red"
+		},
+	]
+};
 
-const KakaoProfile = () => {
+const GoToLink = ({ name, url, color }) => {
 	return (
-		<View style={{flex:1}}>
-			<ImageBackground source={require("./img/profileImg/backgroundImg.jpg")} 
-			style={{flex:1, backgroundColor:'black'}} imageStyle={{opacity:0.8}}>
-			{/* 상단 버튼 */}
-				<View style={styles.topContainer}>
-				{/* 왼쪽 상단 닫기 버튼 */}
-					<TouchableWithoutFeedback onPress={() => createAlert("닫기")}>
-						<Image source={require("./img/profileImg/close.png")} style={styles.icon}/>
-					</TouchableWithoutFeedback>
+		<TouchableOpacity onPress={() => Linking.openURL(url)}
+        style={{
+            backgroundColor: color, 
+            height: 100, 
+            width: 300,
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            borderRadius: 30, 
+            marginBottom: 50
+        }}>
+		    <Text style={styles.txt}>Go To {name}</Text>
+		</TouchableOpacity>
+	)
+};
 
-				{/* 오른쪽 상단 버튼 3개 */}
-					<View style={{flexDirection:'row'}}>
-						<TouchableWithoutFeedback onPress={() => createAlert("선물하기")}>
-							<Image source={require("./img/profileImg/gift.png")} style={styles.icon}/>
-						</TouchableWithoutFeedback>
-						<TouchableWithoutFeedback onPress={() => createAlert("송금코드")}>
-							<Image source={require("./img/profileImg/QR.png")} style={styles.icon}/>
-						</TouchableWithoutFeedback>
-						<TouchableWithoutFeedback onPress={() => createAlert("프로필 관리")}>
-							<Image source={require("./img/profileImg/setting.png")} style={styles.icon}/>
-						</TouchableWithoutFeedback>
-					</View>
+const SearchEngine = () => {
+	return (
+		<SafeAreaView>
+			<ScrollView contentContainerStyle={{alignItems:'center'}}>
+				<Text style={styles.title}>검색 엔진 모음</Text>
+				<View>
+					<GoToLink name={DATA.page[0].name} url={DATA.page[0].url} color={DATA.page[0].mainColor}/>
+					<GoToLink name={DATA.page[1].name} url={DATA.page[1].url} color={DATA.page[1].mainColor}/>
+					<GoToLink name={DATA.page[2].name} url={DATA.page[2].url} color={DATA.page[2].mainColor}/>
+					<GoToLink name={DATA.page[3].name} url={DATA.page[3].url} color={DATA.page[3].mainColor}/>
+					<GoToLink name={DATA.page[4].name} url={DATA.page[4].url} color={DATA.page[4].mainColor}/>
+					<GoToLink name={DATA.page[5].name} url={DATA.page[5].url} color={DATA.page[5].mainColor}/>
+					<GoToLink name={DATA.page[6].name} url={DATA.page[6].url} color={DATA.page[6].mainColor}/>
 				</View>
-
-			{/* 프로필 사진 & 이름 */}
-				<View style={styles.profileContainer}>
-					<TouchableWithoutFeedback onPress={() => createAlert("프로필 사진")}>
-						<Image source={require("./img/profileImg/profileImg.jpg")} style={styles.profileImage}/>
-					</TouchableWithoutFeedback>
-					<Text style={styles.name}>김동희</Text>
-				</View>
-
-			{/* 하단 버튼 3개 */}
-				<View style={styles.bottomContainer}>
-					<TouchableWithoutFeedback onPress={() => createAlert("나와의 채팅")}>
-						<View style={{alignItems:'center'}}>
-							<Image source={require("./img/profileImg/chat.png")} style={styles.icon}/>
-							<Text style={{color:'white'}}>나와의 채팅</Text>
-						</View>
-					</TouchableWithoutFeedback>
-					<TouchableWithoutFeedback onPress={() => createAlert("프로필 편집")}>
-						<View style={{alignItems:'center'}}>
-							<Image source={require("./img/profileImg/edit.png")} style={styles.icon}/>
-							<Text style={{color:'white'}}>프로필 편집</Text>
-						</View>
-					</TouchableWithoutFeedback>
-					<TouchableWithoutFeedback onPress={() => createAlert("카카오스토리")}>
-						<View style={{alignItems:'center'}}>
-							<Image source={require("./img/profileImg/story.png")} style={styles.icon}/>
-							<Text style={{color:'white'}}>카카오스토리</Text>
-						</View>
-					</TouchableWithoutFeedback>
-				</View>
-			</ImageBackground>
-		</View>
+			</ScrollView>
+		</SafeAreaView>
 	)
 };
 
 const styles = StyleSheet.create({
-	topContainer: {
-		flex: 1,
-		flexDirection: 'row', 
-		justifyContent: 'space-between', 
-		padding: 12
-	},
-	profileContainer: {
-		flex: 10,
-		alignItems: 'center', 
-		justifyContent: 'flex-end',
-		paddingBottom: 40,
-		borderBottomWidth: 0.5,
-		borderBottomColor: 'white'
-	},
-	bottomContainer: {
-		flex: 2,
-		flexDirection: 'row', 
-		justifyContent: 'space-evenly',
-		paddingTop:20,
-	},
-	icon: {
-		height: 20,
-		width: 20,
-		margin: 10
-	},
-	profileImage: {
-		height: 100,
-		width: 100,
-		borderRadius: 40
-	},
-	name: {
-		color: 'white',
-		fontSize: 20,
+	title: {
+		color: 'gray', 
+		fontSize: 30, 
 		fontWeight: '600',
-		marginTop: 10
+		margin: 50
+	},
+	txt: {
+		fontSize: 15, 
+		color: 'white'
 	}
 });
 
-export default KakaoProfile;
+export default SearchEngine;
